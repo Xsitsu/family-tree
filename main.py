@@ -4,6 +4,8 @@ import sys
 import argparse
 import json
 
+from person_registry import PersonRegistry
+from person import Person
 
 
 ap = argparse.ArgumentParser()
@@ -17,5 +19,16 @@ with open(args.input_file, "r") as f:
 	json_obj = json.load(f)
 
 
-print("json_obj:", json_obj)
+print("json:", json_obj["people"])
+print()
+print("dir(json):", dir(json_obj["people"]))
+
+
+people = json_obj["people"]
+
+registry = PersonRegistry()
+for name in people:
+	print(name)
+
+
 
