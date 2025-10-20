@@ -32,11 +32,8 @@ for name in people.keys():
 	for child_name in people[name]:
 		child = registry.GetOrAddPerson(child_name)
 		p.AddChild(child)
+		child.AddParent(p)
 
 
 print()
-print()
-for name in registry.people:
-	print(registry.people[name])
-
 
