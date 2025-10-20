@@ -27,8 +27,16 @@ print("dir(json):", dir(json_obj["people"]))
 people = json_obj["people"]
 
 registry = PersonRegistry()
-for name in people:
-	print(name)
+for name in people.keys():
+	p = registry.GetOrAddPerson(name)
+	for child_name in people[name]:
+		child = registry.GetOrAddPerson(child_name)
+		p.AddChild(child)
 
+
+print()
+print()
+for name in registry.people:
+	print(registry.people[name])
 
 
