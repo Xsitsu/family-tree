@@ -1,3 +1,5 @@
+import pydot
+
 class Person:
 	id_counter = 0
 
@@ -11,14 +13,25 @@ class Person:
 		self.children = list()
 		self.parents = list()
 
+		self.node = pydot.Node(self.NodeName(), label=self.name)
+		self.children_edges = list()
+
+
 	def __str__(self):
 		return f"Person({self._id}, name='{self.name}')"
 
+	def NodeName(self):
+		return str(self._id)
+
 	def AddChild(self, person):
-		self.children.append(person)
+		if person not in self.children:
+			self.children.append(person)
+			edge = pydot.Edge(self.NodeName(), person.NodeName(), color="black")
+			self.children_edges.append(edge)
 
 	def AddParent(self, person):
-		self.parents.append(person)
+		if person not in self.parents:
+			self.parents.append(person)
 
 
 	def PrintAllDescendants(self, lvl=0):
